@@ -2,18 +2,18 @@
 
 function issueCard() {
     for (var i = 1; i <= 16; i++){
-        var r = Math.floor((Math.random() * 4);
+        var r = Math.floor((Math.random() * 4));
             switch (r){
-                case 0; $('#d2').append('<img id="img' + i + '" class="issue club">');
+                case 0: $('#d2').append('<img id="img' + i + '" class="issue club">');
                         $('#d3').append('<img class="ref club">');
                         break;
-                case 1; $('#d2').append('<img id="img' + i + '" class="issue diamonds">');
+                case 1: $('#d2').append('<img id="img' + i + '" class="issue diamonds">');
                         $('#d3').append('<img class="ref diamonds">');
                         break;
-                case 2; $('#d2').append('<img id="img' + i + '" class="issue hearts">');
+                case 2: $('#d2').append('<img id="img' + i + '" class="issue hearts">');
                         $('#d3').append('<img class="ref hearts">');
                         break;
-                case 3; $('#d2').append('<img id="img' + i + '" class="issue spades">');
+                case 3: $('#d2').append('<img id="img' + i + '" class="issue spades">');
                         $('#d3').append('<img class="ref spades">');
                         break;
             }
@@ -27,7 +27,7 @@ function update() {
     $('.diamonds').attr("src","./img/ace-of-diamonds.svg");
     $('.hearts').attr("src","./img/ace-of-hearts.svg");
     $('.spades').attr("src","./img/ace-of-spades.svg");
-    $('.back').attr("src","./img/ace-of-h.svg");
+    $('.back').attr("src","./img/joker-card.svg");
 }
 
 $(function() {
@@ -70,7 +70,7 @@ $('.issue').on('click', function(){
 
     } else if (flip == 1) {}
       $('#i1').val( 2 );
-      $('#i5').val( this.id);
+      $('#i5').val( this.id );
 
         if ( $(this).hasClass("club") ){
             second = 'club';
@@ -81,7 +81,7 @@ $('.issue').on('click', function(){
         } else {
             second = 'spades';
         }
-        $('#i3')( second );
+        $('#i3').val( second );
     
         var myid1 = '#' + $('#i4').val();
         var myid2 = '#' + $('#i5').val();
@@ -96,10 +96,32 @@ $('.issue').on('click', function(){
                 first = '';
                 second = '';
                 $('#i2').val(  first );
-                $('#i3').val(  first );
-            })
+                $('#i3').val(  second );
+                $('#i1').val( 0 ); // flip = 0
+                $('#i4').val( '' );
+                $('#i5').val( '' );
+            }, 500);
+} else {
+    setTimeout(function(){
 
-
+                $(myid1).removeClass('selected');
+                $(myid2).removeClass('selected');
+                $(myid1).addClass('back');
+                $(myid2).addClass('back');
+                update();
+                alert('try again!');
+                first = '';
+                second = '';
+                $('#i2').val( first );
+                $('#i3').val( second );
+                $('#i1').val( 0 ); //flip=0
+                $('#i4').val( '' );
+                $('#i5').val( '' );
+            }, 200);
         }
+            
+update();
 
-    )}
+    });
+
+    });
